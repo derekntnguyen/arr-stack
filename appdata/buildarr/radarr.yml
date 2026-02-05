@@ -1,0 +1,69 @@
+radarr:
+  hostname: "radarr"
+  port: 7878
+  api_key: ${RADARR_API_KEY}
+
+  settings:
+    # 1. FILE NAMING & PATHS (Optimized for NAS)
+    media_management:
+      rename_movies: true
+      replace_illegal_characters: true
+      colon_replacement: space-dash-space
+      standard_movie_format: "{Movie CleanTitle} {(Release Year)} {tmdb-{TmdbId}} - {edition-{Edition Tags}} {[MediaInfo 3D]}{[Custom Formats]}{[Quality Full]}{[Mediainfo AudioCodec}{ Mediainfo AudioChannels]}{[MediaInfo VideoDynamicRangeType]}{[Mediainfo VideoCodec]}{-Release Group}"
+      movie_folder_format: "{Movie CleanTitle} ({Release Year}) {tmdb-{TmdbId}}"
+      use_hardlinks: true
+      root_folders:
+        definitions:
+          - path: "/data/media/movies"
+          - path: "/data/media/anime-movies"
+
+    # 2. TRaSH GUIDES - Quality & Custom Formats
+    # This automatically keeps your quality definitions up to date
+    quality:
+      trash_id: "7efa346ca48a97c38520267200885e34"
+
+    custom_formats:
+      definitions:
+        - trash_id: "47435ece6b99a0b477caf360e79ba0bb" # x265 (HD)
+          score: 50
+        - trash_id: "54823930-7407-4f81-8b09-3f2d25081242" # HDR10
+          score: 100
+        - trash_id: "96bc792461f30f25312002242194c1e6" # Remux Tier 1
+          score: 500
+
+    profiles:
+      quality_profiles:
+        definitions:
+          - name: "TRaSH - HD-1080p"
+            upgrades_allowed: true
+            upgrade_until_quality: WEBDL-1080p
+            upgrade_until_custom_format_score: 500
+            qualities:
+              - Bluray-1080p
+              - WEBDL-1080p
+              - HDTV-1080p
+
+    # 3. DOWNLOAD CLIENTS
+    download_clients:
+      definitions:
+        qBittorrent:
+          type: qbittorrent
+          enable: true
+          host: "gluetun"
+          port: 8080
+          category: "movies"
+        NZBGet:
+          type: nzbget
+          enable: true
+          host: "nzbget"
+          port: 6789
+          password: ${NZBGET_PASSWORD}
+          category: "movies"
+
+    # 4. SYSTEM SETTINGS
+    general:
+      host:
+        instance_name: "Radarr"
+    ui:
+      theme: "dark"
+      time_format: "twentyfour-hour"
