@@ -124,18 +124,18 @@ services:
       - ${NAS_PATH}/media:/data/media
     restart: unless-stopped
 
-  # Config Automation
-  buildarr:
-    image: buildarr/buildarr:latest
-    container_name: buildarr
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    volumes:
-      - ./appdata/buildarr:/config
-    depends_on:
-      - radarr
-      - sonarr
-      - prowlarr
-    restart: unless-stopped
+  # # Config Automation
+  # buildarr:
+  #   image: buildarr/buildarr:latest
+  #   container_name: buildarr
+  #   environment:
+  #     - PUID=${PUID}
+  #     - PGID=${PGID}
+  #     - TZ=${TZ}
+  #   volumes:
+  #     - ./appdata/buildarr:/config
+  #   depends_on:
+  #     - radarr
+  #     - sonarr
+  #     - prowlarr
+  #   restart: unless-stopped
