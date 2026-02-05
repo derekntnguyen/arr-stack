@@ -17,7 +17,7 @@ prowlarr:
 
       # 2. INDEXER DEFINITIONS
       definitions:
-        NZzb.life:
+        Nzb.life:
           type: newznab
           enable: true
           fields:
