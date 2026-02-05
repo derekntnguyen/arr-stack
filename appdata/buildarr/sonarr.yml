@@ -1,0 +1,100 @@
+sonarr:
+  hostname: "sonarr"
+  port: 8989
+  api_key: ${SONARR_API_KEY}
+
+  settings:
+    # 1. MEDIA MANAGEMENT (NAS Optimized)
+    media_management:
+      rename_episodes: true
+      replace_illegal_characters: true
+      use_hardlinks: true
+      standard_episode_format: "{Series TitleYear} - S{season:00}E{episode:00} - {Episode CleanTitle} - {[Preferred Words]} {[Quality Full]} {[MediaInfo VideoDynamicRangeType]} [{MediaInfo VideoBitDepth}bit] {[MediaInfo VideoCodec]} [{Mediainfo AudioCodec} {Mediainfo AudioChannels}] {[MediaInfo AudioLanguages]} {[Release Group]} - Default"
+      series_folder_format: "{Series TitleYear} {tvdb-{TvdbId}}"
+      season_folder_format: "Season {season:00}"
+      root_folders:
+        - "/data/media/tv"
+        - "/data/media/anime"
+
+    # 2. QUALITY DEFINITIONS (TRaSH Bitrate Limits)
+    quality:
+      trash_id: "bef99584217af744e404ed44a33af589"
+
+    # 3. RELEASE PROFILES (TRaSH Preferred Words)
+    # These scores prioritize high-quality groups (like NTb, FLUX)
+    # and penalize low-quality groups (like MeGusta, PSA).
+    release_profiles:
+      delete_unmanaged: true
+      definitions:
+        # --- STANDARD WEB-DL PROFILES ---
+        "Release Sources (Streaming Service)":
+          trash_id: 1B018E0C53EC825085DD911102E2CA36
+        "P2P Groups + Repack/Proper":
+          trash_id: 71899E6C303A07AF0E4746EFF9873532
+        "Low Quality Groups":
+          trash_id: EBC725268D687D588A20CBC5F97E538B
+
+        # --- ANIME SPECIFIC PROFILES ---
+        # Uses tags to ensure these don't interfere with standard TV
+        "Anime Profile 1 (Quality)":
+          trash_id: d428eda85af1df8904b4bbe4fc2f537c
+          strict_negative_scores: true
+          tags: ["anime"]
+        "Anime Profile 2 (Groups)":
+          trash_id: 6cd9e10bb5bb4c63d2d7cd3279924c7b
+          strict_negative_scores: true
+          tags: ["anime"]
+
+        # --- OPTIONALS (Filtered) ---
+        "Optionals":
+          trash_id: 76e060895c5b8a765c310933da0a5357
+          filter:
+            include:
+              - ea83f4740cec4df8112f3d6dd7c82751 # Prefer Season Packs
+              - 6f2aefa61342a63387f2a90489e90790 # Dislike renamed/retagged
+              - cec8880b847dd5d31d29167ee0112b57 # Golden Rule: Ignore 1080p x265
+    # 4. QUALITY PROFILES
+    profiles:
+      quality_profiles:
+        definitions:
+          - name: "TRaSH - HD-1080p"
+            upgrades_allowed: true
+            upgrade_until: "WEBDL-1080p"
+            qualities:
+              - "Bluray-1080p"
+              - "WEBDL-1080p"
+              - "WEBRip-1080p"
+              - "WEBDL-720p"
+
+      language_profiles:
+        definitions:
+          - name: "Original Only"
+            languages:
+              - original
+            upgrade_until: original
+            upgrades_allowed: true
+
+    # 5. DOWNLOAD CLIENTS
+    download_clients:
+      definitions:
+        qBittorrent:
+          type: qbittorrent
+          enable: true
+          host: "gluetun"
+          port: 8080
+          category: "tv"
+        NZBGet:
+          type: nzbget
+          enable: true
+          host: "nzbget"
+          port: 6789
+          password: ${NZBGET_PASSWORD}
+          category: "tv"
+
+    # 6. SYSTEM SETTINGS
+    general:
+      host:
+        instance_name: "Sonarr"
+    ui:
+      theme: "dark"
+      time_format: "twentyfour-hour"
