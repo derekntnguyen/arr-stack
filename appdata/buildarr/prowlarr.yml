@@ -1,0 +1,42 @@
+prowlarr:
+  hostname: "prowlarr"
+  port: 9696
+  api_key: ${PROWLARR_API_KEY}
+
+  settings:
+    # 1. INDEXER PROXIES (FlareSolverr)
+    indexers:
+      proxies:
+        definitions:
+          FlareSolverr:
+            type: flaresolverr
+            host_url: "http://flaresolverr:8191/"
+            request_timeout: 60
+            tags:
+              - "flaresolverr"
+
+      # 2. INDEXER DEFINITIONS
+      definitions:
+        NZzb.life:
+          type: newznab
+          enable: true
+          fields:
+            baseUrl: "https://api.nzb.life"
+            api_key: ${NZBLIFE_API_KEY}
+
+    # 3. APPLICATION LINKS (Sync to Radarr/Sonarr)
+    apps:
+      definitions:
+        Radarr:
+          type: radarr
+          hostname: "radarr"
+          port: 7878
+          api_key: ${RADARR_API_KEY}
+          sync_level: full-sync
+
+        Sonarr:
+          type: sonarr
+          hostname: "sonarr"
+          port: 8989
+          api_key: ${SONARR_API_KEY}
+          sync_level: full-sync
