@@ -1,0 +1,18 @@
+# Main Buildarr Entry Point
+includes:
+  - prowlarr.yml
+  - radarr.yml
+  - sonarr.yml
+
+buildarr:
+  watch_config: true
+  update_days:
+    - "monday"
+    - "tuesday"
+    - "wednesday"
+    - "thursday"
+    - "friday"
+    - "saturday"
+    - "sunday"
+  update_times:
+    - "03:00"
