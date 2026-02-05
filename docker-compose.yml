@@ -9,9 +9,10 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun
     environment:
-      - VPNSP=mullvad
+      - TZ=${TZ}
+      - VPN_SERVICE_PROVIDER=mullvad
       - VPN_TYPE=wireguard
-      - WIREGUARD_ADDRESS=${WIREGUARD_ADDRESS}
+      - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
       - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
     ports:
       - 8080:8080 # qBittorrent Web UI
