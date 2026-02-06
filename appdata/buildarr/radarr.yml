@@ -13,9 +13,10 @@ radarr:
       movie_folder_format: "{Movie CleanTitle} ({Release Year}) {tmdb-{TmdbId}}"
       use_hardlinks: true
       root_folders:
+        delete_unmanaged: true
         definitions:
-          - path: "/data/media/movies"
-          - path: "/data/media/anime-movies"
+          - "/data/media/movies"
+          - "/data/media/anime-movies"
 
     # 2. TRaSH GUIDES - Quality & Custom Formats
     # This automatically keeps your quality definitions up to date
