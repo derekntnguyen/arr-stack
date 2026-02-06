@@ -13,8 +13,8 @@ sonarr:
       series_folder_format: "{Series TitleYear} {tvdb-{TvdbId}}"
       season_folder_format: "Season {season:00}"
       root_folders:
-        - "/data/media/tv"
-        - "/data/media/anime"
+        - path: "/data/media/tv"
+        - path: "/data/media/anime"
 
     # 2. QUALITY DEFINITIONS (TRaSH Bitrate Limits)
     quality:
