@@ -6,7 +6,7 @@ export BWS_ACCESS_TOKEN := ${BWS_ACCESS_TOKEN}
 export TZ := America/Chicago
 export PUID := 1000
 export PGID := 1000
-export NAS_PATH := /mnt/nas
+export NAS_PATH := /mnt/nas/data
 
 # --- Commands ---
 
