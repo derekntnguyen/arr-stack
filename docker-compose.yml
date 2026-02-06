@@ -127,7 +127,7 @@ services:
 
   # Config Automation
   buildarr:
-    image: buildarr/buildarr:latest
+    image: callum027/buildarr:latest
     container_name: buildarr
     environment:
       - PUID=${PUID}
