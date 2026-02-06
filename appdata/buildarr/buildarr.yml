@@ -1,8 +1,8 @@
 # Main Buildarr Entry Point
 includes:
   - prowlarr.yml
-  - radarr.yml
-  - sonarr.yml
+  # - radarr.yml
+  # - sonarr.yml
 
 buildarr:
   watch_config: true
