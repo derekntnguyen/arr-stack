@@ -76,20 +76,31 @@ sonarr:
 
     # 5. DOWNLOAD CLIENTS
     download_clients:
+      delete_unmanaged: true
       definitions:
         qBittorrent:
           type: qbittorrent
           enable: true
-          host: "gluetun"
+          hostname: "gluetun"
           port: 8080
+          username: ${QBITTORRENT_USER}
+          password: ${QBITTORRENT_PASS}
           category: "tv"
+          remove_completed_downloads: true
+          remove_failed_downloads: true
+
         NZBGet:
           type: nzbget
           enable: true
-          host: "nzbget"
+          hostname: "nzbget"
           port: 6789
-          password: ${NZBGET_PASSWORD}
+          username: ${NZBGET_USER}
+          password: ${NZBGET_PASS}
           category: "tv"
+          recent_priority: "normal"
+          older_priority: "normal"
+          remove_completed_downloads: true
+          remove_failed_downloads: true
 
     # 6. SYSTEM SETTINGS
     general:
