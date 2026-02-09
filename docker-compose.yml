@@ -137,3 +137,17 @@ services:
       - RADARR_API_KEY=${RADARR_API_KEY}
     volumes:
       - ./appdata/recyclarr:/config
+
+  # Monitoring
+  tautulli:
+    image: ghcr.io/tautulli/tautulli
+    container_name: tautulli
+    restart: unless-stopped
+    volumes:
+      - ./appdata/tautulli:/config
+    environment:
+      - TZ=${TZ}
+      - PUID=${PUID}
+      - PGID=${PGID}
+    ports:
+      - 8181:8181
